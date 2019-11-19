@@ -6,9 +6,12 @@ import java.util.Scanner;
 public class fibonacciMain {
 
 	public static void main(String[] args) {
-		int limit = input();;
-		int fibonacci = fibonacci(1, 0, limit, 2);
-		System.out.println("Fibonacci-Folge bis Grenze "+limit+" = "+ fibonacci);
+		int limit = input();
+		System.out.println();
+		System.out.println("Rekursiv:");
+		System.out.println("Fibonacci-Folge bis Grenze "+limit+" = "+fibonacciRek(limit));
+		System.out.println("Endrekursiv:");
+		System.out.println("Fibonacci-Folge bis Grenze "+limit+" = "+fibonacciEndRek(1, 0, limit, 2));
 	}
 	
 	public static int input() {
@@ -32,7 +35,18 @@ public class fibonacciMain {
 		return input;
 		
 	}
-	public static int fibonacci(int lastNumber, int numberBeforeLastNumber, int limit, int counter) {
+	public static int fibonacciRek(int limit) {
+		if (limit == 0) {
+			return 0;
+		}
+		else if (limit == 1) {
+			return 1;
+		}
+		else {
+			return fibonacciRek(limit - 1) + fibonacciRek(limit - 2);
+		}
+	}
+	public static int fibonacciEndRek(int lastNumber, int numberBeforeLastNumber, int limit, int counter) {
 		if (limit == 0) {
 			return 0;
 		}
@@ -43,7 +57,7 @@ public class fibonacciMain {
 			return (lastNumber + numberBeforeLastNumber);
 		}
 		else {
-			return fibonacci(lastNumber + numberBeforeLastNumber, lastNumber, limit, counter + 1);
+			return fibonacciEndRek(lastNumber + numberBeforeLastNumber, lastNumber, limit, counter + 1);
 		}
 	}
 }
